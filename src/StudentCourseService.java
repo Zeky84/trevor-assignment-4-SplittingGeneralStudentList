@@ -6,7 +6,7 @@ import java.util.List;
 public class StudentCourseService {
     private List<StudentInfo> loadStudents() throws IOException {
 
-        List<StudentInfo> allStudentsInfo = new ArrayList<>();
+        List<StudentInfo> allStudentsInfo = new ArrayList<StudentInfo>();
         try (BufferedReader fileReader = new BufferedReader(new FileReader("student-master-list.csv"))) {
             String line = "";
             while ((line = fileReader.readLine()) != null) {
@@ -22,9 +22,9 @@ public class StudentCourseService {
 
     public void studentGroupsExportCSV() throws IOException {
         //Making list of StudentInfo to store every course
-        List<StudentInfo> groupCourse1 = new ArrayList<>();
-        List<StudentInfo> groupCourse2 = new ArrayList<>();
-        List<StudentInfo> groupCourse3 = new ArrayList<>();
+        List<StudentInfo> groupCourse1 = new ArrayList<StudentInfo>();
+        List<StudentInfo> groupCourse2 = new ArrayList<StudentInfo>();
+        List<StudentInfo> groupCourse3 = new ArrayList<StudentInfo>();
 
         for (StudentInfo student : loadStudents()) {
             if (student.getStudentCourse().contains("COMPSCI")) {
