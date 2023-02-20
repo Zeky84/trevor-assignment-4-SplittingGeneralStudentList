@@ -22,25 +22,25 @@ public class StudentCourseService {
 
     public void studentGroupsExportCSV() throws IOException {
         //Making list of StudentInfo to store every course
-        List<StudentInfo> listCourse1 = new ArrayList<>();
-        List<StudentInfo> listCourse2 = new ArrayList<>();
-        List<StudentInfo> listCourse3 = new ArrayList<>();
+        List<StudentInfo> groupCourse1 = new ArrayList<>();
+        List<StudentInfo> groupCourse2 = new ArrayList<>();
+        List<StudentInfo> groupCourse3 = new ArrayList<>();
 
         for (StudentInfo student : loadStudents()) {
             if (student.getStudentCourse().contains("COMPSCI")) {
-                listCourse1.add(student);
+                groupCourse1.add(student);
             }
             if (student.getStudentCourse().contains("APMTH")) {
-                listCourse2.add(student);
+                groupCourse2.add(student);
             }
             if (student.getStudentCourse().contains("STAT")) {
-                listCourse3.add(student);
+                groupCourse3.add(student);
             }
         }
         //Converting List<StudentInfo> to Array StudentInfo to be sort
-        StudentInfo[] course1 = listCourse1.toArray(new StudentInfo[listCourse1.toArray().length]);
-        StudentInfo[] course2 = listCourse2.toArray(new StudentInfo[listCourse2.toArray().length]);
-        StudentInfo[] course3 = listCourse3.toArray(new StudentInfo[listCourse3.toArray().length]);
+        StudentInfo[] course1 = groupCourse1.toArray(new StudentInfo[groupCourse1.toArray().length]);
+        StudentInfo[] course2 = groupCourse2.toArray(new StudentInfo[groupCourse2.toArray().length]);
+        StudentInfo[] course3 = groupCourse3.toArray(new StudentInfo[groupCourse3.toArray().length]);
 
         //Sorting Arrays of every course
         Arrays.sort(course1);
