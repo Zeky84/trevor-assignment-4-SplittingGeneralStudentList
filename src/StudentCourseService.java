@@ -4,16 +4,16 @@ import java.util.Arrays;
 import java.util.List;
 
 public class StudentCourseService {
-    private ArrayList<StudentInfo> loadStudents() throws IOException {
+    private List<StudentInfo> loadStudents() throws IOException {
 
-        ArrayList<StudentInfo> allStudentsInfo = new ArrayList<>();
+        List<StudentInfo> allStudentsInfo = new ArrayList<>();
         try (BufferedReader fileReader = new BufferedReader(new FileReader("student-master-list.csv"))) {
             String line = "";
             while ((line = fileReader.readLine()) != null) {
                 try {
                     allStudentsInfo.add(new StudentInfo(line.split(",")));
                 } catch (NumberFormatException nfe) {
-                    System.out.println("NumberFormat Exception: invalid input string: " + nfe);
+                    System.out.println("NumberFormat Exception: " + nfe);
                 }
             }
         }
