@@ -1,5 +1,5 @@
 
-public class StudentInfo implements Comparable<StudentInfo>{
+public class StudentInfo implements Comparable<StudentInfo> {
     private final Integer studentID;
     private final String studentFullName;
     private final String studentCourse;

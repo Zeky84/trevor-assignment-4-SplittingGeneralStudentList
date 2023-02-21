@@ -4,16 +4,22 @@ import java.util.Arrays;
 import java.util.List;
 
 public class StudentCourseService {
+    String[] headerLine = new String[4];
     private List<StudentInfo> loadStudents() throws IOException {
 
-        List<StudentInfo> allStudentsInfo = new ArrayList<StudentInfo>();
+        List<StudentInfo> allStudentsInfo = new ArrayList<>();
         try (BufferedReader fileReader = new BufferedReader(new FileReader("student-master-list.csv"))) {
-            String line = "";
+            String line;
+            //Reading the header line of the file to avoid the try-catch message
+             headerLine = fileReader.readLine().split(",");
             while ((line = fileReader.readLine()) != null) {
+                //NOTE
                 try {
                     allStudentsInfo.add(new StudentInfo(line.split(",")));
                 } catch (NumberFormatException nfe) {
-                    System.out.println("NumberFormat Exception: " + nfe);
+                    System.out.println("NumberFormat Exception: " + nfe +
+                            " Because first line of the file contains header," +
+                            "header values can't be use to feed POJO attributes!.");
                 }
             }
         }
@@ -22,9 +28,9 @@ public class StudentCourseService {
 
     public void studentGroupsExportCSV() throws IOException {
         //Making list of StudentInfo to store every course
-        List<StudentInfo> groupCourse1 = new ArrayList<StudentInfo>();
-        List<StudentInfo> groupCourse2 = new ArrayList<StudentInfo>();
-        List<StudentInfo> groupCourse3 = new ArrayList<StudentInfo>();
+        List<StudentInfo> groupCourse1 = new ArrayList<>();
+        List<StudentInfo> groupCourse2 = new ArrayList<>();
+        List<StudentInfo> groupCourse3 = new ArrayList<>();
 
         for (StudentInfo student : loadStudents()) {
             if (student.getStudentCourse().contains("COMPSCI")) {
@@ -56,7 +62,7 @@ public class StudentCourseService {
     private void writeFileToCSV(StudentInfo[] course, String csvFileToExport) throws IOException {
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvFileToExport))) {
-            writer.write("StudentID,Student Name,Course,Grade\n");
+            writer.write(headerLine[0]+","+ headerLine[1]+","+headerLine[2]+","+headerLine[3]+"\n");
             for (StudentInfo student : course) {
                 writer.write(student.getStudentID() + "," + student.getStudentFullName() +
                         "," + student.getStudentCourse() + "," + student.getStudentGrade()+"\n");
